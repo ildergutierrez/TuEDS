@@ -106,6 +106,22 @@ const listaEDS = [
         }
     }
 ];
+// <div class="row">
+//     <div class="col-6"><p class="card-text">Gasolina:</p></div>
+//     <div class="col-6"><p class="card-text">$${eds.precio_gasolina}</p></div>
+// </div>
+// <div class="row">
+//     <div class="col-6"><p class="card-text">Extra:</p></div>
+//     <div class="col-6"><p class="card-text">$${eds.precio_extra}</p></div>
+// </div>
+// <div class="row">
+//     <div class="col-6 in"><p class="card-text">Diésel:</p></div>
+//     <div class="col-6 in"><p class="card-text">$${eds.precio_diesel}</p></div>
+// </div>
+// <div class="row">
+//     <div class="col-6"><p class="card-text">Gas:</p></div>
+//     <div class="col-6"><p class="card-text">$${eds.precio_gnv}</p></div>
+// </div>
 
 function EDS(listaEDS) {
     let estacionHTML = ``;
@@ -122,33 +138,19 @@ function EDS(listaEDS) {
                 <div class="card h-100 ">
                 
                     <img src="img/servicios.png" class="card-img-top" alt="${eds.nombre}" />
-                    <div class="card-body ">
-                        <h5 class="card-title">${eds.nombre}</h5>
-
-                        <div class="row">
-                            <div class="col-6"><p class="card-text">Gasolina:</p></div>
-                            <div class="col-6"><p class="card-text">$${eds.precio_gasolina}</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6"><p class="card-text">Extra:</p></div>
-                            <div class="col-6"><p class="card-text">$${eds.precio_extra}</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 in"><p class="card-text">Diésel:</p></div>
-                            <div class="col-6 in"><p class="card-text">$${eds.precio_diesel}</p></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6"><p class="card-text">Gas:</p></div>
-                            <div class="col-6"><p class="card-text">$${eds.precio_gnv}</p></div>
-                        </div>
-
-                        <p class="card-text mt-2"><b>Servicios</b></p>
+                    <div class="card-body  ">
+                    <div> 
+                    <h5 class="card-title">${eds.nombre}
+                    </h5>
+                            </div>   
+                            <div class="card-body">               
+                        <p class="card-text mt-2"><b>Servicios disponibles:</b></p>
                         <div class="card-text">
                             ${Servicios(eds.servicios)}
-                        </div>
-
+                        </div></div>
+                        <div>
                         <a href="paginas/detalles.html?staction=${btoa(eds.id)}" class="btn btn-dark mt-2">Ver detalles</a>
-                    </div>
+                    </div></div>
                 </div>
             </div>
         `;
