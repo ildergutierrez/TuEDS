@@ -106,6 +106,7 @@ span {
     color: #000;
 }
 
+
 .fila {
     display: flex;
     gap: 5px;
@@ -186,7 +187,7 @@ main{
         margin-bottom: 1rem;
     }
 
-    .col-6 {
+   .detalles .col-6 {
         width: 100%;
         margin-bottom: 1rem;
     }

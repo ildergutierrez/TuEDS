@@ -134,8 +134,8 @@ function EDS(listaEDS) {
                             <div class="col-6"><p class="card-text">$${eds.precio_extra}</p></div>
                         </div>
                         <div class="row">
-                            <div class="col-6"><p class="card-text">Diésel:</p></div>
-                            <div class="col-6"><p class="card-text">$${eds.precio_diesel}</p></div>
+                            <div class="col-6 in"><p class="card-text">Diésel:</p></div>
+                            <div class="col-6 in"><p class="card-text">$${eds.precio_diesel}</p></div>
                         </div>
                         <div class="row">
                             <div class="col-6"><p class="card-text">Gas:</p></div>
