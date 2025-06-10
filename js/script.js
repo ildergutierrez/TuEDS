@@ -1,55 +1,161 @@
 const estacions = document.getElementById("estaciones");
+const listaEDS = [
+  {
+    nombre: "EDS San Alberto Norte",
+    precio_gasolina: 11200,
+    precio_extra: 11900,
+    precio_diesel: 9800,
+    precio_gnv: 7700,
+    servicios: {
+      tienda: 1,
+      hospedaje: 0,
+      baños: 1,
+      mecanico: 0,
+      montallanta: 1
+    }
+  },
+  {
+    nombre: "EDS Pailitas Express",
+    precio_gasolina: 11350,
+    precio_extra: 12100,
+    precio_diesel: 9900,
+    precio_gnv: 7800,
+    servicios: {
+      tienda: 1,
+      hospedaje: 1,
+      baños: 1,
+      mecanico: 1,
+      montallanta: 1
+    }
+  },
+  {
+    nombre: "EDS El Paraíso",
+    precio_gasolina: 11000,
+    precio_extra: 11700,
+    precio_diesel: 9600,
+    precio_gnv: 7500,
+    servicios: {
+      tienda: 1,
+      hospedaje: 0,
+      baños: 1,
+      mecanico: 0,
+      montallanta: 0
+    }
+  },
+  {
+    nombre: "EDS Central del Valle",
+    precio_gasolina: 11400,
+    precio_extra: 12200,
+    precio_diesel: 10000,
+    precio_gnv: 7900,
+    servicios: {
+      tienda: 1,
+      hospedaje: 1,
+      baños: 1,
+      mecanico: 1,
+      montallanta: 1
+    }
+  },
+  {
+    nombre: "EDS Ruta 45",
+    precio_gasolina: 11150,
+    precio_extra: 11800,
+    precio_diesel: 9700,
+    precio_gnv: 7600,
+    servicios: {
+      tienda: 1,
+      hospedaje: 0,
+      baños: 1,
+      mecanico: 1,
+      montallanta: 1
+    }
+  },
+  {
+    nombre: "EDS La Fortuna",
+    precio_gasolina: 10900,
+    precio_extra: 11550,
+    precio_diesel: 9500,
+    precio_gnv: 7400,
+    servicios: {
+      tienda: 0,
+      hospedaje: 0,
+      baños: 1,
+      mecanico: 0,
+      montallanta: 1
+    }
+  },
+  {
+    nombre: "EDS Mirador Llanero",
+    precio_gasolina: 11300,
+    precio_extra: 12000,
+    precio_diesel: 9900,
+    precio_gnv: 7850,
+    servicios: {
+      tienda: 1,
+      hospedaje: 1,
+      baños: 1,
+      mecanico: 0,
+      montallanta: 0
+    }
+  }
+];
 
-function EDS() {
-    let estacion = ` <div class="row">
-                        <div class="col-4">
-                            <div class="card">
-                                <img src="img/LOGO.png" class="card-img-top" alt="Estación 1" />
-                                <div class="card-body">
-                                    <h5 class="card-title">nombre</h5>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p class="card-text">Gasolina: </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-text">$ </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p class="card-text">Extra: </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-text">$ </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p class="card-text">Disel: </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-text">$ </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p class="card-text">Gas: </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-text">$ </p>
-                                        </div>
-                                    </div>
-                                    <p class="card-text"><b>Servicios</b></p>
-                                    <div class="card-text">
-                                        ${Servicios(serviciosEDS)}
-                                    </div>
-                                    <a href="#" class="btn btn-primary">Ver Detalles</a>
-                                </div>
-                            </div>
+function EDS(listaEDS) {
+    let estacionHTML = ``;
+    let contador = 0;
+
+    listaEDS.forEach((eds, index) => {
+        // Abrir nueva fila si es el primero o cada 3 elementos
+        if (contador % 3 === 0) {
+            estacionHTML += `<div class="row mb-4">`;
+        }
+
+        estacionHTML += `
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="img/LOGO.png" class="card-img-top" alt="${eds.nombre}" />
+                    <div class="card-body">
+                        <h5 class="card-title">${eds.nombre}</h5>
+
+                        <div class="row">
+                            <div class="col-6"><p class="card-text">Gasolina:</p></div>
+                            <div class="col-6"><p class="card-text">$${eds.precio_gasolina}</p></div>
                         </div>
-                    </div>`;
-    estacions.innerHTML += estacion;
+                        <div class="row">
+                            <div class="col-6"><p class="card-text">Extra:</p></div>
+                            <div class="col-6"><p class="card-text">$${eds.precio_extra}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><p class="card-text">Diésel:</p></div>
+                            <div class="col-6"><p class="card-text">$${eds.precio_diesel}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><p class="card-text">Gas:</p></div>
+                            <div class="col-6"><p class="card-text">$${eds.precio_gnv}</p></div>
+                        </div>
+
+                        <p class="card-text mt-2"><b>Servicios</b></p>
+                        <div class="card-text">
+                            ${Servicios(eds.servicios)}
+                        </div>
+
+                        <a href="#" class="btn btn-primary mt-3">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        contador++;
+
+        // Cerrar fila después de cada 3 columnas o al final de la lista
+        if (contador % 3 === 0 || index === listaEDS.length - 1) {
+            estacionHTML += `</div>`; // cerrar la fila
+        }
+    });
+
+    estacions.innerHTML = estacionHTML;
 }
+
 const serviciosEDS = {
     tienda: 1,
     hospedaje: 0,
@@ -111,4 +217,5 @@ function Servicios(serviciosDB) {
 }
 
 
-EDS();
+// Inicializar la lista de estaciones de servicio
+EDS(listaEDS);
