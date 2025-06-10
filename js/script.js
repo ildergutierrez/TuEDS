@@ -182,7 +182,7 @@ const listaServicios = [
     { clave: 'montallanta', nombre: 'Llantería', icono: 'construction' },
     { clave: 'autolavado', nombre: 'Autolavado', icono: 'local_car_wash' },
     { clave: 'cajero', nombre: 'Cajero', icono: 'local_atm' },
-    { clave: 'carga', nombre: 'Carga electrica', icono: 'battery_charging_full' },
+    { clave: 'carga', nombre: 'Carga electrica', icono: 'ev_station' },
     { clave: 'restaurante', nombre: 'Restaurante', icono: 'restaurant' }
 
 ];
