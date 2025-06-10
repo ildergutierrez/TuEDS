@@ -1,103 +1,110 @@
 const estacions = document.getElementById("estaciones");
 const listaEDS = [
-  {
-    nombre: "EDS San Alberto Norte",
-    precio_gasolina: 11200,
-    precio_extra: 11900,
-    precio_diesel: 9800,
-    precio_gnv: 7700,
-    servicios: {
-      tienda: 1,
-      hospedaje: 0,
-      baños: 1,
-      mecanico: 0,
-      montallanta: 1
+    {
+        id: 1,
+        nombre: "EDS San Alberto Norte",
+        precio_gasolina: 11200,
+        precio_extra: 11900,
+        precio_diesel: 9800,
+        precio_gnv: 7700,
+        servicios: {
+            tienda: 1,
+            hospedaje: 0,
+            baños: 1,
+            mecanico: 0,
+            montallanta: 1
+        }
+    },
+    {
+        id: 2,
+        nombre: "EDS Pailitas Express",
+        precio_gasolina: 11350,
+        precio_extra: 12100,
+        precio_diesel: 9900,
+        precio_gnv: 7800,
+        servicios: {
+            tienda: 1,
+            hospedaje: 1,
+            baños: 1,
+            mecanico: 1,
+            montallanta: 1
+        }
+    },
+    {
+        id: 3,
+        nombre: "EDS El Paraíso",
+        precio_gasolina: 11000,
+        precio_extra: 11700,
+        precio_diesel: 9600,
+        precio_gnv: 7500,
+        servicios: {
+            tienda: 1,
+            hospedaje: 0,
+            baños: 1,
+            mecanico: 0,
+            montallanta: 0
+        }
+    },
+    {
+        id: 4,
+        nombre: "EDS Central del Valle",
+        precio_gasolina: 11400,
+        precio_extra: 12200,
+        precio_diesel: 10000,
+        precio_gnv: 7900,
+        servicios: {
+            tienda: 1,
+            hospedaje: 1,
+            baños: 1,
+            mecanico: 1,
+            montallanta: 1
+        }
+    },
+    {
+        id: 5,
+        nombre: "EDS Ruta 45",
+        precio_gasolina: 11150,
+        precio_extra: 11800,
+        precio_diesel: 9700,
+        precio_gnv: 7600,
+        servicios: {
+            tienda: 1,
+            hospedaje: 0,
+            baños: 1,
+            mecanico: 1,
+            montallanta: 1
+        }
+    },
+    {
+        id: 6,
+        nombre: "EDS La Fortuna",
+        precio_gasolina: 10900,
+        precio_extra: 11550,
+        precio_diesel: 9500,
+        precio_gnv: 7400,
+        servicios: {
+            tienda: 0,
+            hospedaje: 0,
+            baños: 1,
+            mecanico: 0,
+            montallanta: 1
+        }
+    },
+    {
+        id: 7,
+        nombre: "EDS Mirador Llanero",
+        precio_gasolina: 11300,
+        precio_extra: 12000,
+        precio_diesel: 9900,
+        precio_gnv: 7850,
+        servicios: {
+            tienda: 1,
+            hospedaje: 1,
+            baños: 1,
+            mecanico: 0,
+            montallanta: 0
+        }
     }
-  },
-  {
-    nombre: "EDS Pailitas Express",
-    precio_gasolina: 11350,
-    precio_extra: 12100,
-    precio_diesel: 9900,
-    precio_gnv: 7800,
-    servicios: {
-      tienda: 1,
-      hospedaje: 1,
-      baños: 1,
-      mecanico: 1,
-      montallanta: 1
-    }
-  },
-  {
-    nombre: "EDS El Paraíso",
-    precio_gasolina: 11000,
-    precio_extra: 11700,
-    precio_diesel: 9600,
-    precio_gnv: 7500,
-    servicios: {
-      tienda: 1,
-      hospedaje: 0,
-      baños: 1,
-      mecanico: 0,
-      montallanta: 0
-    }
-  },
-  {
-    nombre: "EDS Central del Valle",
-    precio_gasolina: 11400,
-    precio_extra: 12200,
-    precio_diesel: 10000,
-    precio_gnv: 7900,
-    servicios: {
-      tienda: 1,
-      hospedaje: 1,
-      baños: 1,
-      mecanico: 1,
-      montallanta: 1
-    }
-  },
-  {
-    nombre: "EDS Ruta 45",
-    precio_gasolina: 11150,
-    precio_extra: 11800,
-    precio_diesel: 9700,
-    precio_gnv: 7600,
-    servicios: {
-      tienda: 1,
-      hospedaje: 0,
-      baños: 1,
-      mecanico: 1,
-      montallanta: 1
-    }
-  },
-  {
-    nombre: "EDS La Fortuna",
-    precio_gasolina: 10900,
-    precio_extra: 11550,
-    precio_diesel: 9500,
-    precio_gnv: 7400,
-    servicios: {
-      tienda: 0,
-      hospedaje: 0,
-      baños: 1,
-      mecanico: 0,
-      montallanta: 1
-    }
-  },
-  {
-    nombre: "EDS Mirador Llanero",
-    precio_gasolina: 11300,
-    precio_extra: 12000,
-    precio_diesel: 9900,
-    precio_gnv: 7850,
-    servicios: {
-      tienda: 1,
-      hospedaje: 1,
-      baños: 1,
-      mecanico: 0,
-      montallanta: 0
-    }
-  }
 ];
 
 function EDS(listaEDS) {
@@ -112,9 +119,10 @@ function EDS(listaEDS) {
 
         estacionHTML += `
             <div class="col-12 col-md-4 mb-3">
-                <div class="card h-100">
-                    <img src="img/LOGO.png" class="card-img-top" alt="${eds.nombre}" />
-                    <div class="card-body">
+                <div class="card h-100 ">
+                
+                    <img src="img/servicios.png" class="card-img-top" alt="${eds.nombre}" />
+                    <div class="card-body ">
                         <h5 class="card-title">${eds.nombre}</h5>
 
                         <div class="row">
@@ -139,7 +147,7 @@ function EDS(listaEDS) {
                             ${Servicios(eds.servicios)}
                         </div>
 
-                        <a href="#" class="btn btn-primary mt-3">Ver Detalles</a>
+                        <a href="paginas/detalles.html?staction=${btoa(eds.id)}" class="btn btn-dark mt-2">Ver detalles</a>
                     </div>
                 </div>
             </div>
