@@ -1,1 +1,3 @@
 # TuEDS
+TuEDS es una plataforma web diseñada para ofrecer información actualizada y confiable sobre las estaciones de servicio (EDS) ubicadas a lo largo de la troncal San Alberto – Pailitas. Su objetivo es facilitar a conductores, transportadores y viajeros el acceso rápido a datos relevantes como tipos de estaciones, precios de combustibles y servicios disponibles (tienda, baños, hospedaje, restaurante, mecánica, llantería y autolavado).
+Con una interfaz intuitiva y geolocalización, TuEDS se convierte en una herramienta esencial para planificar paradas seguras, eficientes y bien informadas en esta importante vía del país.
