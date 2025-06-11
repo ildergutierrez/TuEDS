@@ -8,7 +8,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 function Valores($conn)
 {
-    $sql = $conn->prepare("SELECT * FROM eds ");
+    $sql = $conn->prepare("SELECT * FROM eds ORDER BY id DESC ");
     $sql->execute();
     $result = $sql->get_result();
     $data = array();
@@ -19,9 +19,9 @@ function Valores($conn)
             "id" => $row['id'],
             "nombre" => $row['nombre'],
             "img" => $row['img'],
-            "lat" => $row['lat'],
-            "lon" => $row['lon'],
-            "servicios" => Servicios($conn, $row['id'])
+            "latitud" => $row['lat'],
+            "longitud" => $row['lon'],
+            
         );
         $data[] = $eds;
     }
@@ -29,23 +29,8 @@ function Valores($conn)
     return $data;
 }
 
-function Servicios($conn, $id)
-{
-    $data = array();
-    $sql = $conn->prepare("SELECT * FROM servicios WHERE id = ?");
-    $sql->bind_param("i", $id);
-    $sql->execute();
-    $result = $sql->get_result();
-
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    return $data;
-}
 
 // Mostrar el JSON formateado correctamente
 echo json_encode(Valores($conn), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
-// Cerrar la conexión
 $conn->close();

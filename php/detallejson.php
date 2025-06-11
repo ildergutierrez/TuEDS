@@ -34,7 +34,7 @@ function Valores($conn, $id)
 function Servicios($conn, $id)
 {
     $data = array();
-    $sql = $conn->prepare("SELECT * FROM servicios WHERE eds = ?");
+    $sql = $conn->prepare("SELECT * FROM servicios WHERE id = ?");
     $sql->bind_param("i", $id);
     $sql->execute();
     $result = $sql->get_result();
@@ -48,7 +48,7 @@ function Servicios($conn, $id)
 function Costos($conn, $id)
 {
     $data = array();
-    $sql = $conn->prepare("SELECT * FROM combustibles WHERE eds = ?");
+    $sql = $conn->prepare("SELECT * FROM combustibles WHERE id = ?");
     $sql->bind_param("i", $id);
     $sql->execute();
     $result = $sql->get_result();

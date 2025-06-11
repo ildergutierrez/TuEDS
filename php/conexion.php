@@ -1,9 +1,18 @@
 <?php 
-$host = 'tramway.proxy.rlwy.net';         // MYSQLHOST
-$usuario = 'root';         // Usuario por defecto
-$contrasena = 'yIMRFJUFMvQyLhGxebOSvDvnaWauGFHq';   // MYSQL_ROOT_PASSWORD
-$base_datos = 'railway';   // MYSQL_DATABASE
-$port = 25723;            // Puerto por defecto de MySQL
+// $host = 'tramway.proxy.rlwy.net';         // MYSQLHOST
+// $usuario = 'root';         // Usuario por defecto
+// $contrasena = 'yIMRFJUFMvQyLhGxebOSvDvnaWauGFHq';   // MYSQL_ROOT_PASSWORD
+// $base_datos = 'railway';   // MYSQL_DATABASE
+// $port = 25723;            // Puerto por defecto de MySQL
+
+
+$host = "localhost";
+$usuario = "root";
+$contrasena = "";
+$base_datos = "tueds";
+$port = 3306; // Puerto por defecto de MySQL
+
+
 
 // Crear conexión
 $conn = new mysqli($host, $usuario, $contrasena, $base_datos, $port);
