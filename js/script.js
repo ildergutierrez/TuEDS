@@ -1,7 +1,7 @@
 const estacions = document.getElementById("estaciones");
 const listaEDS = async () => {
     try {
-        const respuesta = await fetch("php/jsons.php");
+        const respuesta = await fetch("php/jsons.php?callback=estaciones");
         const data = await respuesta.json();
         console.log(data);
         if(data.length >0)
@@ -81,12 +81,12 @@ const listaServicios = [
     { clave: 'tienda', nombre: 'Tienda', icono: 'store' },
     { clave: 'hospedaje', nombre: 'Hospedaje', icono: 'hotel' },
     { clave: 'banos', nombre: 'Baños', icono: 'wc' },
-    { clave: 'mecanico', nombre: 'Mecánica', icono: 'build' },
-    { clave: 'montallanta', nombre: 'Llantería', icono: 'construction' },
-    { clave: 'autolavado', nombre: 'Autolavado', icono: 'local_car_wash' },
+    { clave: 'mecanica', nombre: 'Mecánica', icono: 'build' }, { clave: 'lavadero', nombre: 'Autolavado', icono: 'local_car_wash' },
+    
+    { clave: 'restaurante', nombre: 'Restaurante', icono: 'restaurant' },{ clave: 'carga', nombre: 'Carga electrica', icono: 'ev_station' },
     { clave: 'cajero', nombre: 'Cajero', icono: 'local_atm' },
-    { clave: 'carga', nombre: 'Carga electrica', icono: 'ev_station' },
-    { clave: 'restaurante', nombre: 'Restaurante', icono: 'restaurant' }
+    { clave: 'montallanta', nombre: 'Llantería', icono: 'construction' },
+   
 
 ];
 
@@ -94,18 +94,20 @@ function Servicios(serviciosDB) {
     let serviciosHTML = ``;
     let filaAbierta = false;
     let contador = 0;
-    console.log("Servicios disponibles:", serviciosDB);
+
+    // Asegurar que haya al menos un objeto
+    const servicioDatos = serviciosDB[0];
+    if (!servicioDatos) return "";
+
+    console.log("Datos de servicio:", servicioDatos);
 
     listaServicios.forEach(servicio => {
-        console.log("Servicio:",servicio);
-        if (serviciosDB[servicio.clave] == 1) {
-            // Abrir nueva fila si es necesario
+        if (servicioDatos[servicio.clave] === 1) {
             if (!filaAbierta) {
                 serviciosHTML += `<div class="fila">`;
                 filaAbierta = true;
             }
 
-            // Añadir servicio
             serviciosHTML += `<div class="columna-servicio">
                 <span class="material-symbols-outlined">${servicio.icono}</span>
                 <span>${servicio.nombre}</span>
@@ -113,7 +115,6 @@ function Servicios(serviciosDB) {
 
             contador++;
 
-            // Cerrar fila si ya hay dos columnas
             if (contador % 2 === 0) {
                 serviciosHTML += `</div>`;
                 filaAbierta = false;
@@ -121,7 +122,6 @@ function Servicios(serviciosDB) {
         }
     });
 
-    // Si quedó una fila abierta (por número impar), cerrarla
     if (filaAbierta) {
         serviciosHTML += `</div>`;
     }

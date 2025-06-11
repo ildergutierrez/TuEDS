@@ -4,106 +4,120 @@ const params = new URLSearchParams(window.location.search);
 // Obtiene el valor del parámetro "id"
 const id = params.get('staction');
 const informacion = document.getElementById("information");
-const array ={
-     id: 1,
-        nombre: "EDS San Alberto Norte",
-        precio_gasolina: 11200,
-        precio_extra: 11900,
-        precio_diesel: 9800,
-        precio_gnv: 100,
-        servicios: {
-            tienda: 1,
-            hospedaje: 1,
-            baños: 1,
-            mecanico: 1,
-            montallanta: 1,
-            carga: 1,
-        },
-        latitud: 8.321019,
-        longitud: -73.587119
-}
-function Rellenar(array) {
-  let preciosHTML = '';
+const array = async () => {
+  try {
+    const respuesta = await fetch("../php/detallejson.php?callback=estaciones&dt=" + id);
+    const data = await respuesta.json();
+    console.log(data);
 
-  // Precios de combustibles con íconos y diseño
-  if (array.precio_gasolina > 0) {
+    if (data.length > 0) {
+      Rellenar(data[0]); // <-- Arreglado aquí
+    }
+
+  } catch (error) {
+    console.error("Error al cargar las estaciones de servicio:", error);
+  }
+};
+
+function Rellenar(array) {
+  console.log("Datos de la estación:", array);
+
+  let preciosHTML = '';
+  const precios = array.combustibles[0]; // Sacamos el objeto de combustibles
+console.log("Precios de combustibles:", precios);
+  if (precios.gasolisa > 0) {
     preciosHTML += `
       <div class="combustible">
         <span class="material-symbols-outlined text-success">local_gas_station</span>
-        <strong>Gasolina:</strong> $${array.precio_gasolina.toLocaleString()} COP
+        <strong>Gasolina:</strong> $${precios.gasolisa.toLocaleString()} COP
       </div>`;
   }
-  if (array.precio_extra > 0) {
+
+  if (precios.extra > 0) {
     preciosHTML += `
       <div class="combustible">
         <span class="material-symbols-outlined text-success">gas_meter</span>
-        <strong>Extra:</strong> $${array.precio_extra.toLocaleString()} COP
-      </div>`;
-  }
-  if (array.precio_diesel > 0) {
-    preciosHTML += `
-      <div class="combustible">
-        <span class="material-symbols-outlined text-success">oil_barrel</span>
-        <strong>Diesel:</strong> $${array.precio_diesel.toLocaleString()} COP
-      </div>`;
-  }
-  if (array.precio_gnv > 0) {
-    preciosHTML += `
-      <div class="combustible">
-        <span class="material-symbols-outlined text-success">local_gas_station</span>
-        <strong>GNV:</strong> $${array.precio_gnv.toLocaleString()} COP
+        <strong>Extra:</strong> $${precios.extra.toLocaleString()} COP
       </div>`;
   }
 
-  // Sección de información renderizada
+  if (precios.deisel > 0) {
+    preciosHTML += `
+      <div class="combustible">
+        <span class="material-symbols-outlined text-success">oil_barrel</span>
+        <strong>Diesel:</strong> $${precios.deisel.toLocaleString()} COP
+      </div>`;
+  }
+
+  if (precios.gas > 0) {
+    preciosHTML += `
+      <div class="combustible">
+        <span class="material-symbols-outlined text-success">local_gas_station</span>
+        <strong>GNV:</strong> $${precios.gas.toLocaleString()} COP
+      </div>`;
+  }
+
+  let serviciosHTML = '';
+  if (array.servicios && array.servicios.length > 0) {
+    serviciosHTML = Servicios(array.servicios[0]); // Asegúrate que pasas el objeto correcto
+  } else {
+    serviciosHTML = '<p>No hay servicios disponibles.</p>';
+  }
+
   const html = `
-    <div class="info-box p-3 rounded ">
-     
+    <div class="info-box p-3 rounded">
       <div class="precios mb-4">
         ${preciosHTML}
       </div>
       <h5 class="mb-2">Servicios Disponibles</h5>
       <div class="servicios mb-3">
-        ${Servicios(array.servicios)}
+        ${serviciosHTML}
       </div>
     </div>
   `;
 
   informacion.innerHTML = html;
 
-  // Cargar mapa y título
+  // Mapa y nombre
   Point(array.latitud, array.longitud, array.nombre);
   document.getElementById("name").innerText = array.nombre;
 }
+
+
 
 
 const listaServicios = [
     { clave: 'tienda', nombre: 'Tienda', icono: 'store' },
     { clave: 'hospedaje', nombre: 'Hospedaje', icono: 'hotel' },
     { clave: 'banos', nombre: 'Baños', icono: 'wc' },
-    { clave: 'mecanico', nombre: 'Mecánica', icono: 'build' },
-    { clave: 'montallanta', nombre: 'Llantería', icono: 'construction' },
-    { clave: 'autolavado', nombre: 'Autolavado', icono: 'local_car_wash' },
+    { clave: 'mecanica', nombre: 'Mecánica', icono: 'build' }, { clave: 'lavadero', nombre: 'Autolavado', icono: 'local_car_wash' },
+    
+    { clave: 'restaurante', nombre: 'Restaurante', icono: 'restaurant' },{ clave: 'carga', nombre: 'Carga electrica', icono: 'ev_station' },
     { clave: 'cajero', nombre: 'Cajero', icono: 'local_atm' },
-    { clave: 'carga', nombre: 'Carga electrica', icono: 'ev_station' },
-    { clave: 'restaurante', nombre: 'Restaurante', icono: 'restaurant' }
+    { clave: 'montallanta', nombre: 'Llantería', icono: 'construction' },
+   
 
 ];
 
 function Servicios(serviciosDB) {
+  console.log("Servicios DB:", serviciosDB);
     let serviciosHTML = ``;
     let filaAbierta = false;
     let contador = 0;
 
+    // Asegurar que haya al menos un objeto
+    const servicioDatos = serviciosDB;
+    if (!servicioDatos) return "";
+
+    console.log("Datos de servicio:", servicioDatos);
+
     listaServicios.forEach(servicio => {
-        if (serviciosDB[servicio.clave] == 1) {
-            // Abrir nueva fila si es necesario
+        if (servicioDatos[servicio.clave] === 1) {
             if (!filaAbierta) {
                 serviciosHTML += `<div class="fila">`;
                 filaAbierta = true;
             }
 
-            // Añadir servicio
             serviciosHTML += `<div class="columna-servicio">
                 <span class="material-symbols-outlined">${servicio.icono}</span>
                 <span>${servicio.nombre}</span>
@@ -111,7 +125,6 @@ function Servicios(serviciosDB) {
 
             contador++;
 
-            // Cerrar fila si ya hay dos columnas
             if (contador % 2 === 0) {
                 serviciosHTML += `</div>`;
                 filaAbierta = false;
@@ -119,14 +132,12 @@ function Servicios(serviciosDB) {
         }
     });
 
-    // Si quedó una fila abierta (por número impar), cerrarla
     if (filaAbierta) {
         serviciosHTML += `</div>`;
     }
 
     return serviciosHTML;
 }
-
 
 
 // Mostrar en consola
@@ -151,6 +162,4 @@ function Point(lat = 0, lon = 0, nombre = "EDS") {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  Rellenar(array);
-});
+array();
