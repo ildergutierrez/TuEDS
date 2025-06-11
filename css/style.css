@@ -104,9 +104,16 @@ body {
 
 span {
     color: #000;
+
 }
 
-
+.span {
+    vertical-align: middle;
+    font-size: 40px;
+}
+.btn-light{
+    padding: 0px;
+}
 .fila {
     display: flex;
     gap: 5px;
@@ -177,6 +184,10 @@ main{
 
 
 @media screen and (max-width: 768px) {
+    .btn-light{
+    display: none;
+    }
+
     .card {
         margin: 0 auto;
         width: 90%;
@@ -189,6 +200,55 @@ main{
 
    .detalles .col-6 {
         width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .btn-light {
+        display: none;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .card-img,
+    .card-img-bottom,
+    .card-img-top {
+        height: 120px;
+    }
+
+    .columna-servicio {
+        width: 100%;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 992px) {
+    .btn-light {
+        display: none;
+    }
+    .hero {
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.75rem;
+    }
+
+    .hero p {
+        font-size: 1.125rem;
+    }
+    .col-6 {
+        width: 50%;
+        margin-bottom: 1rem;
+    }
+    .col-4 {
+        width:50%;
         margin-bottom: 1rem;
     }
 }

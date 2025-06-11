@@ -1,0 +1,38 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+     display: grid;
+    /* para que el footer se quede al final */
+    min-height: 100dvh;
+    /* 100dvh para que ocupe toda la pantalla */
+    grid-template-rows: auto 1fr auto;
+    /* el footer se coloca al final */
+}
+main {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.row {
+    
+    margin: auto;
+}
+.ojo{
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .col-6 {
+        width: 100%;
+        padding: 0 10px;
+    }
+}

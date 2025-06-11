@@ -1,9 +1,9 @@
 <?php 
-// $host = 'tramway.proxy.rlwy.net';         // MYSQLHOST
-// $usuario = 'root';         // Usuario por defecto
-// $contrasena = 'yIMRFJUFMvQyLhGxebOSvDvnaWauGFHq';   // MYSQL_ROOT_PASSWORD
-// $base_datos = 'railway';   // MYSQL_DATABASE
-// $port = 25723;            // Puerto por defecto de MySQL
+// $host = 'sql206.infinityfree.com';         // MYSQLHOST
+// $usuario = 'if0_39210269';         // Usuario por defecto
+// $contrasena = 'TblpBH3zJgdZ';   // MYSQL_ROOT_PASSWORD
+// $base_datos = 'if0_39210269_tuedes';   // MYSQL_DATABASE
+// $port = 3306;            // Puerto por defecto de MySQL
 
 
 $host = "localhost";
