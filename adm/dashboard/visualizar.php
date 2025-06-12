@@ -13,10 +13,10 @@ if (isset($_GET['echo']) && $_GET['echo'] == 1) {
        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
       </div></div>";
 }
-if (isset($_GET['id'])=="" || $_GET['id'] == null) {
+if (isset($_GET['id']) == "" || $_GET['id'] == null) {
     echo "<script>alert('No se ha seleccionado ninguna estación.');  window.location.href='listado.php';</script>";
-}else{
-    $id= $_GET['id'];
+} else {
+    $id = $_GET['id'];
 }
 
 ?>
@@ -54,7 +54,7 @@ if (isset($_GET['id'])=="" || $_GET['id'] == null) {
                             <a class="nav-link active" aria-current="page" href="start.php">Inicio</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="nav-link" href="#">Estaciones</a>
+                            <a class="nav-link" href="estaciones.php">Estaciones</a>
                         </li>
                         <li class="list-group-item">
                             <a class="nav-link" href="usuarios.php">Usuarios</a>
@@ -86,7 +86,7 @@ if (isset($_GET['id'])=="" || $_GET['id'] == null) {
                 <div class="list-group">
                     <ul class="navbar-nav">
                         <li class="list-group-item"><a href="start.php" class="nav-link active" aria-current="page">Inicio</a></li>
-                        <li class="list-group-item"><a href="#" class="nav-link">Estaciones</a></li>
+                        <li class="list-group-item"><a href="estaciones.php" class="nav-link">Estaciones</a></li>
                         <li class="list-group-item"><a href="usuarios.php" class="nav-link ">Usuarios</a></li>
                         <li class="list-group-item"><a href="configuracion.php" class="nav-link ">Configuración</a></li>
                         <li class="list-group-item"> <a href="../php/close.php" class="btn btn-light " id="btn-login"> <span class="material-symbols-outlined span">logout</span></a></li>
@@ -97,136 +97,142 @@ if (isset($_GET['id'])=="" || $_GET['id'] == null) {
         <div style="margin-top: 20px; width: 90%; margin: auto;">
             <div class="row">
                 <div class="col-10">
-                    <h1 class="text-center">Registro de EDS</h1>
+                    <div class="text-center">
+                        <h1>Visualizar Estación de Servicio</h1>
+                        <p class="lead">Aquí puedes ver los detalles de la estación de servicio seleccionada.</p>
+                    </div>
+                    <div id="imagen-preview" class="text-center mb-3">
+                        <img src="../../img/eds.png" alt="Imagen de la EDS" class="img-fluid" style="max-width: 400px; max-height: 300px; border-radius: 10px;">
+                    </div>
                 </div>
+
                 <div class="col-2">
-                    <h1 class="d-flex justify-content-end my-4"><a href="listado.php" title="Listado" class="btn btn-dark"><span class="material-symbols-outlined">format_list_numbered</span></a></h1>
+                    <h1 class="d-flex justify-content-end my-4"><a href="../php/delete.php?id=<?php echo $id ?>" title="Eliminar" class="btn btn-dark"><span class="material-symbols-outlined">delete</span></a></h1>
                 </div>
             </div>
-            <?php
-            if ($mensaje != "") {
-                echo $mensaje; // Mostrar mensaje de éxito si se ha registrado correctamente
-            }
-            ?>
-            <div id="imagen-preview" class="text-center mb-3">
-                <img src="../../img/eds.png" alt="Imagen de la EDS" class="img-fluid" style="max-width: 200px; max-height: 200px;">
+        </div>
+        <?php
+        if ($mensaje != "") {
+            echo $mensaje; // Mostrar mensaje de éxito si se ha registrado correctamente
+        }
+        ?>
+
+       
+        <!-- HJADJKAS -->
+        <form action="" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
+         <input type="hidden" id="id" name="ids" value="<?php echo $id; ?>"> <!-- Campo oculto para almacenar el ID de la estación de servicio -->    
+        <div class="row">
+                <div class="col-6">
+                    <h2 class="text-center">Datos de la EDS</h2>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Nombre EDS" name="nombre_eds" required>
+                            <label for="floatingInputGrid1">EDS</label>
+                        </div>
+                    </div><br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Latitud" name="lat" required>
+                            <label for="floatingInputGrid6">Latitud</label>
+                        </div>
+                    </div><br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Longitud" name="lon" required>
+                            <label for="floatingInputGrid5">Longitud</label>
+                        </div>
+                    </div><br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="file" class="form-control" name="imagen" placeholder="Imagen" accept="image/*">
+                            <label for="floatingInputGrid4">Imagen</label>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-6">
+                    <h2 class="text-center">Valor Combustible</h2>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Gasolina" name="gasolina" required>
+                            <label for="floatingInputGrid3">Gasolina Corriente</label>
+                        </div>
+                    </div><br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Gasolina Extra" name="extra" required>
+                            <label for="floatingInputGrid2">Gasolina Extra</label>
+                        </div>
+                    </div><br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Diesel" name="diesel" required>
+                            <label for="floatingInputGrid1">Diesel</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="Glp" name="gas" required>
+                            <label for="floatingInputGrid0">Gas</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input type="hidden" id="id" value="<?php echo $id; ?>"> <!-- Campo oculto para almacenar el ID de la estación de servicio -->
-            <!-- HJADJKAS -->
-            <form action="" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="text-center">Datos de la EDS</h2>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Nombre EDS" name="nombre_eds" required>
-                                <label for="floatingInputGrid1">EDS</label>
-                            </div>
-                        </div><br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Latitud" name="lat" required>
-                                <label for="floatingInputGrid6">Latitud</label>
-                            </div>
-                        </div><br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Longitud" name="lon" required>
-                                <label for="floatingInputGrid5">Longitud</label>
-                            </div>
-                        </div><br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="file" class="form-control" name="imagen" placeholder="Imagen" accept="image/*">
-                                <label for="floatingInputGrid4">Imagen</label>
-                            </div>
-                        </div>
-                        <br>
+            <!-- Servicios -->
+            <div class="row">
+                <h2 class="text-center">Servicos de la EDS</h2>
+                <!-- Tienda - hospedaje - Baños -->
+                <div class="col-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" value="0" name="tienda">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Tienda</label>
                     </div>
-                    <div class="col-6">
-                        <h2 class="text-center">Valor Combustible</h2>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Gasolina" name="gasolina" required>
-                                <label for="floatingInputGrid3">Gasolina Corriente</label>
-                            </div>
-                        </div><br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Gasolina Extra" name="extra" required>
-                                <label for="floatingInputGrid2">Gasolina Extra</label>
-                            </div>
-                        </div><br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Diesel" name="diesel" required>
-                                <label for="floatingInputGrid1">Diesel</label>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Glp" name="gas" required>
-                                <label for="floatingInputGrid0">Gas</label>
-                            </div>
-                        </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" value="0" name="hospedaje">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Hospedaje</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3" value="0" name="banos">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Baños</label>
                     </div>
                 </div>
-                <!-- Servicios -->
-                <div class="row">
-                    <h2 class="text-center">Servicos de la EDS</h2>
-                    <!-- Tienda - hospedaje - Baños -->
-                    <div class="col-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" value="0" name="tienda">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Tienda</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" value="0" name="hospedaje">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Hospedaje</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3" value="0" name="banos">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Baños</label>
-                        </div>
+                <!-- mecanica -lavadero - Restaurante -->
+                <div class="col-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaul4t" value="0" name="taller">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Taller</label>
                     </div>
-                    <!-- mecanica -lavadero - Restaurante -->
-                    <div class="col-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefaul4t" value="0" name="taller">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Taller</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5" value="0" name="lavado">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Auto-Lavado</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault6" value="0" name="restaurante">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Restaurante</label>
-                        </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5" value="0" name="lavado">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Auto-Lavado</label>
                     </div>
-                    <!-- Carga -Cajero - montallanta -->
-                    <div class="col-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault7" value="0" name="carga">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">carga EV</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault8" value="0" name="cajero">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Cajero</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault9" value="0" name="llanteria">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Llanteria</label>
-                        </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault6" value="0" name="restaurante">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Restaurante</label>
                     </div>
                 </div>
-                <br><br>
-                <center>
-                    <button type="submit" class="btn btn-dark">Registrar EDS</button>
-                    <button type="reset" class="btn btn-secondary">Limpiar</button>
-                </center>
-            </form>
+                <!-- Carga -Cajero - montallanta -->
+                <div class="col-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault7" value="0" name="carga">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">carga EV</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault8" value="0" name="cajero">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Cajero</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault9" value="0" name="llanteria">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Llanteria</label>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <center>
+                <button type="submit" class="btn btn-dark">Actualizar</button>
+            </center>
+        </form>
         </div>
 
     </main>
