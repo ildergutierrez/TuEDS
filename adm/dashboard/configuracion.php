@@ -25,38 +25,43 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="btn btn-light " data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                <img class="logo" src="../../img/TUEDS.svg" alt="Logo" /></a>
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img class="logo" src="../../img/TUEDS.svg" alt="Logo" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="list-group-item">
-                            <a class="nav-link active" aria-current="page" href="start.php">Inicio</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="nav-link" href="estaciones.php">Estaciones</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="nav-link" href="usuarios.php">Usuarios</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="nav-link" href="#">Configuración</a>
-                        </li>
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="btn btn-light" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <img class="logo" src="../../img/TUEDS.svg" alt="Logo" />
+    </a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img class="logo" src="../../img/TUEDS.svg" alt="Logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="list-group-item">
+                    <a class="nav-link active" aria-current="page" href="start.php">Inicio</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="nav-link" href="estaciones.php">Estaciones</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="nav-link" href="usuarios.php">Usuarios</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="nav-link" href="#">Configuración</a>
+                </li>
+            </ul>
 
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <a href="../php/close.php" class="nav-item" id="btn-login">
-                            <span class="material-symbols-outlined span">logout</span></a>
-                </div>
-            </div>
-        </nav>
+            <!-- Corrección: formulario de logout que usa POST -->
+            <form class="d-flex" method="POST" action="../php/close.php">
+                <button type="submit" class="btn btn-outline-danger" id="btn-login">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
     </header>
     <main>
         <!-- Cnva -->

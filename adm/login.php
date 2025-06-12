@@ -64,7 +64,7 @@ if (isset($_SESSION['user'])) {
                                 <form action="php/login.php" method="post">
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Usuario</label>
-                                        <input type="text" class="form-control" id="username" name="username" required>
+                                        <input type="email" class="form-control" id="username" name="username" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Contraseña</label>

@@ -1,9 +1,16 @@
 <?php
 session_start();
-
+$mensaje = "";
 if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit();
+}
+//si existe un get echo con valor 1, se muestra un mensaje de éxito
+if (isset($_GET['echo']) && $_GET['echo'] == 1) {
+    $mensaje = "<div class='alert alert-success' role='alert'> <div class='modal-header'>
+        <span class='material-symbols-outlined'>check_circle</span> Administrador registrado correctamente.
+       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div></div>";
 }
 
 
@@ -26,8 +33,9 @@ if (!isset($_SESSION['user'])) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="btn btn-light " data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                <img class="logo" src="../../img/TUEDS.svg" alt="Logo" /></a>
+            <a class="btn btn-light" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img class="logo" src="../../img/TUEDS.svg" alt="Logo" />
+            </a>
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img class="logo" src="../../img/TUEDS.svg" alt="Logo" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -49,14 +57,18 @@ if (!isset($_SESSION['user'])) {
                         <li class="list-group-item">
                             <a class="nav-link" href="configuracion.php">Configuración</a>
                         </li>
-
                     </ul>
-                    <form class="d-flex" role="search">
-                        <a href="../php/close.php" class="nav-item" id="btn-login">
-                            <span class="material-symbols-outlined span">logout</span></a>
+
+                    <!-- Corrección: formulario de logout que usa POST -->
+                    <form class="d-flex" method="POST" action="../php/close.php">
+                        <button type="submit" class="btn btn-outline-danger" id="btn-login">
+                            <span class="material-symbols-outlined">logout</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </nav>
+
     </header>
     <main>
         <!-- Cnva -->
@@ -79,32 +91,62 @@ if (!isset($_SESSION['user'])) {
         </div>
         <!-- fin del offcanva -->
         <div class="container">
-            <h1 class="text-center">Servicios</h1>
-            <p class="text-center">Sistema de gestión de estaciones de servicio</p>
-            <div class="row">
-                <div class="col-md-6 ">
-
-                    <div class="container my-5">
-                        <h4 class="mb-4 text-center">Servicios disponibles</h4>
-                        <div id="barras-servicios" class="list-group"></div>
+            <?php
+            if ($mensaje != "") {
+                echo $mensaje; // Mostrar mensaje de éxito si se ha registrado correctamente
+            }
+            ?>
+            <form action="../php/RegistroUsuario.php" method="POST"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center">Registro de Administrador</h2>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Nombre" name="nombre" required>
+                                <label for="floatingInputGrid1">Nombre</label>
+                            </div>
+                        </div><br>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Apellido" name="apellido" required>
+                                <label for="floatingInputGrid6">Apellido</label>
+                            </div>
+                        </div><br>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Telefono" name="tel" required>
+                                <label for="floatingInputGrid5">Telefono</label>
+                            </div>
+                        </div><br>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Direccion" name="direccion" require>
+                                <label for="floatingInputGrid4">Direccion</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" placeholder="Correo" name="email" require>
+                                <label for="floatingInputGrid4">Correo</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="mb-3">
+                            <div class="input-group flex-nowrap">
+                                <input id="password" minlength="8" name="pass" type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="addon-wrapping" required>
+                                <span onclick="password()" class="input-group-text material-symbols-outlined ojo" id="visible">visibility</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <div class="col-6">
-                    <div class="container my-5">
-                        <h4 class="mb-4 text-center">Distribución de combustibles</h4>
-                        <canvas id="graficoCombustibles" width="300" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                     <div class="container my-5">
-                        <h4 class="mb-4 text-center">Barras (Combustibe) </h4>
-                        <div id="barras-Combustibe" class="list-group"></div>
-                    </div>
-                </div>
-                
+                <br><br>
+                <center>
+                    <button type="submit" class="btn btn-dark">Registrar Admin</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </center>
+            </form>
         </div>
 
     </main>
@@ -121,9 +163,8 @@ if (!isset($_SESSION['user'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/script.js"></script>
 
-    <script src="../js/servicios.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $mensaje = "";
+$id = "";
 if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit();
@@ -8,11 +9,15 @@ if (!isset($_SESSION['user'])) {
 //si existe un get echo con valor 1, se muestra un mensaje de éxito
 if (isset($_GET['echo']) && $_GET['echo'] == 1) {
     $mensaje = "<div class='alert alert-success' role='alert'> <div class='modal-header'>
-        <span class='material-symbols-outlined'>check_circle</span> Estación registrada correctamente.
+        <span class='material-symbols-outlined'>check_circle</span> Estación Actualizada correctamente.
        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
       </div></div>";
 }
-
+if (isset($_GET['id'])=="" || $_GET['id'] == null) {
+    echo "<script>alert('No se ha seleccionado ninguna estación.');  window.location.href='listado.php';</script>";
+}else{
+    $id= $_GET['id'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -103,8 +108,12 @@ if (isset($_GET['echo']) && $_GET['echo'] == 1) {
                 echo $mensaje; // Mostrar mensaje de éxito si se ha registrado correctamente
             }
             ?>
+            <div id="imagen-preview" class="text-center mb-3">
+                <img src="../../img/eds.png" alt="Imagen de la EDS" class="img-fluid" style="max-width: 200px; max-height: 200px;">
+            </div>
+            <input type="hidden" id="id" value="<?php echo $id; ?>"> <!-- Campo oculto para almacenar el ID de la estación de servicio -->
             <!-- HJADJKAS -->
-            <form action="../php/Registro.php" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
+            <form action="" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
                 <div class="row">
                     <div class="col-6">
                         <h2 class="text-center">Datos de la EDS</h2>
@@ -235,7 +244,7 @@ if (isset($_GET['echo']) && $_GET['echo'] == 1) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="../js/registroEstacion.js"></script>
+    <script src="../js/visualizar.js"></script>
 </body>
 
 </html>

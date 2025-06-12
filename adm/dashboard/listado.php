@@ -85,41 +85,19 @@ if (!isset($_SESSION['user'])) {
         <!-- fin del offcanva -->
         <div class="container">
             <div class="row">
-                <div class="col-10">
-                       <h1 class="text-center">Servicios</h1>
-            <p class="text-center">Sistema de gestión de estaciones de servicio</p>
+                <div class="col-8">
+                    <h1 class="text-center">Listado de Estaciones de Servicio</h1>
+                    <p class="text-center">Aquí puedes ver todas las estaciones de servicio registradas.</p>
                 </div>
-                <div class="col-2">
-                    <h1 class="d-flex justify-content-end my-4"><a href="listado.php" title="Listado" class="btn btn-dark"><span class="material-symbols-outlined">format_list_numbered</span></a></h1>
-                </div>
-            </div>
-         
-            <div class="row">
-                <div class="col-md-6 ">
-
-                    <div class="container my-5">
-                        <h4 class="mb-4 text-center">Servicios disponibles</h4>
-                        <div id="barras-servicios" class="list-group"></div>
-                    </div>
-
-                </div>
-                <div class="col-6">
-                    <div class="container my-5">
-                        <h4 class="mb-4 text-center">Distribución de combustibles</h4>
-                        <canvas id="graficoCombustibles" width="300" height="300"></canvas>
-                    </div>
+                <div class="col-4">
+                   <form class="d-flex" role="search">
+                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar EDS">
+                </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="container my-5">
-                        <h4 class="mb-4 text-center">Barras (Combustibe) </h4>
-                        <div id="barras-Combustibe" class="list-group"></div>
-                    </div>
-                </div>
+            <div class="row" id="eds-cards"></div>
 
-            </div>
-
+        </div>
     </main>
     <footer>
         <div class="container">
@@ -134,9 +112,7 @@ if (!isset($_SESSION['user'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script src="../js/servicios.js"></script>
+    <script src="../js/listadoEds.js"></script>
 </body>
 
 </html>
