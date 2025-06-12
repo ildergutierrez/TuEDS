@@ -1,6 +1,6 @@
 // Obtiene los parámetros de la URL
 const params = new URLSearchParams(window.location.search);
-
+const mapa = document.getElementById("map");
 function obtenerUbicacionUsuario() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -57,18 +57,18 @@ const array = async () => {
 };
 
 function Rellenar(array, km) {
-   let preciosHTML = '';
+  let preciosHTML = '';
   //  console.log("dis: ",km);
   // console.log("Datos de la estación:", array);
-if (km > 0) {
-  preciosHTML += `<div class="distancia mb-3">
+  if (km > 0) {
+    preciosHTML += `<div class="distancia mb-3">
       <span class="material-symbols-outlined text-warning">location_on</span>
       <strong>Distancia:</strong> ${km.toFixed(2)} km
     </div>`;
   }
 
 
- 
+
   const precios = array.combustibles[0]; // Sacamos el objeto de combustibles
   // console.log("Precios de combustibles:", precios);
   if (precios.gasolisa > 0) {
@@ -125,8 +125,12 @@ if (km > 0) {
   informacion.innerHTML = html;
 
   // Mapa y nombre
-  Point(array.latitud, array.longitud, array.nombre);
+
   document.getElementById("name").innerText = array.nombre;
+  mapa.innerHTML = ` <center><div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div></center>`;
+  Point(array.latitud, array.longitud, array.nombre);
 }
 
 
@@ -190,6 +194,7 @@ function Servicios(serviciosDB) {
 // alert("ID recibido: " + id);
 
 function Point(lat = 0, lon = 0, nombre = "EDS") {
+mapa.innerHTML = ''; // Limpiar el mapa antes de crear uno nuevo
   // Crear el mapa
   const map = L.map('map').setView([lat, lon], 18); // Zoom muy cercano
 

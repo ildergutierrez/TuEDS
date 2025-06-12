@@ -50,7 +50,7 @@
                     </ul>
                     <form class="d-flex" role="search">
                         <a href="adm/login.php" class="btn btn-light " id="btn-login">
-                        <span class="material-symbols-outlined span">supervised_user_circle</span></a>
+                            <span class="material-symbols-outlined span">supervised_user_circle</span></a>
                 </div>
             </div>
         </nav>
@@ -67,11 +67,14 @@
             <section id="stations-section" class="stations-section container" role="region"
                 aria-label="Listado de Estaciones de Servicio">
                 <h2 class="text-center mb-4">
-                    <strong> Estaciones de Servicio Mas Cercanas Disponibles</strong>  </h2>
-                    <div class="stations-grid" id="estaciones" tabindex="0" aria-live="polite"
-                        aria-relevant="additions">
-                        <!-- Cards inserted dynamically -->
-                    </div>
+                    <strong> Estaciones de Servicio Mas Cercanas Disponibles</strong>
+                </h2>
+                <div class="stations-grid" id="estaciones" tabindex="0" aria-live="polite" aria-relevant="additions">
+                     <center>  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div></center>
+                    <!-- Cards inserted dynamically -->
+                </div>
 
             </section>
         </main>
