@@ -32,7 +32,8 @@ if (isset($_SESSION['user'])) {
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-               
+            </div>
+        </nav>
     </header>
     <main>
         <div class="row">
@@ -74,7 +75,7 @@ if (isset($_SESSION['user'])) {
                                         </div>
                                     </div> 
                                     <center>
-                                        <p><a href="" style="color: #fff;">Olvide contraseña</a></p>
+                                        <p><a href="rest.php" style="color: #fff;">Olvide contraseña</a></p>
                                         <button type="submit" class="btn btn-dark">iniciar sesión</button>
                                     </center>
                                 </form>

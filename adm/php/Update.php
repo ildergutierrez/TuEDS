@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    echo "<script>alert('Acceso no permitido.'); window.location.href='../index.php';</script>";
+    echo "<script>alert('Acceso no permitido.'); window.location.href='../login.php';</script>";
     exit();
 }
 include_once "../../php/conexion.php";
@@ -38,7 +38,19 @@ if (isset($_GET['pass']) && $_GET['pass'] == 1) {
     }
 }
 
-echo "---";
+if (isset($_GET['recuperar']) && $_GET['recuperar'] == 1) {
+    // Verificar que el formulario fue enviado por POST
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        // Recoger datos
+        $correo = strtolower($_POST['correo'] ?? ''); // Convertir a minúsculas y asignar un valor por defecto
+        $contrasena = $_POST['password'] ?? '';
+        Recuperar($conexion, $correo, $contrasena);
+        echo "<script>window.location.href='../rest.php?respuesta=1';</script>";
+    } else {
+        echo "<script>alert('Acceso no permitido.'); window.location.href='../login.php';</script>";
+    }
+}
+
 //Agregar perdsonas a la base de datos INSERT INTO `persona`(`id_persona`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')
 function actualizarPersona($conexion, $id, $nombre, $apellido, $telefono, $direccion, $correo)
 {
@@ -86,3 +98,18 @@ function ActualizarPass($conexion, $id, $contrasena)
         return false;
     }
 }
+
+function Recuperar($conexion, $correo, $contrasena)
+{
+    $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); // Encriptar la contraseña
+    // die("Contrasena: " . $contrasena);
+    $sql = $conexion->prepare("UPDATE usuario SET contrasena = ? WHERE correo = ?");
+    $sql->bind_param("ss", $contrasena, $correo);
+    if ($sql->execute()) {
+        return true;
+    } else {
+        echo "Error al insertar usuario: " . $sql->error;
+        return false;
+    }
+}
+
