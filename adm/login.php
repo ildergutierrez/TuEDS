@@ -70,7 +70,7 @@ if (isset($_SESSION['user'])) {
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Contraseña</label>
                                         <div class="input-group flex-nowrap">
-                                            <input id="password" name="password" type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" required>
+                                            <input id="password" name="password" type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping" required>
                                             <span onclick="password()" class="input-group-text material-symbols-outlined ojo" id="visible">visibility</span>
                                         </div>
                                     </div> 
