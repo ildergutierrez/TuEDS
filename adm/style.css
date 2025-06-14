@@ -113,7 +113,12 @@ main {
     white-space: nowrap; 
     left: 0;
 }
+a {
+    text-decoration: none ;
+    color:  #000;
+    text-align: center;
 
+}
 @media (max-width: 768px) {
     .navbar>.container-fluid {
         display: flex;
@@ -143,4 +148,18 @@ main {
         width: 100%;
         padding: 0 10px;
     }
+    .col-4 {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .col-2 {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .col-2 .row .col-6{
+        width: 50%;
+        padding: 0 10px;
+       
+    }
+
 }

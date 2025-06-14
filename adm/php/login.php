@@ -47,9 +47,12 @@ class Login
             }
             $correo = $user['correo'];
             $nombre = $this->NameUser($this->conexion, $correo);
+            $id = strval($user['id_usuario']);// Convert to string
             session_start();
             $_SESSION['user'] = $user['correo'];
-            $_SESSION['nombre'] = $nombre;
+            $_SESSION['iduser'] = $id;
+            $_SESSION['nombre'] = $nombre['nombre'];
+            $k=$nombre['id_persona'];
             header("Location: ../dashboard/start.php");
             exit();
         } else {
@@ -59,13 +62,12 @@ class Login
     }
 
     private function NameUser($conn,$correo){
-        $stmt = $conn->prepare("SELECT nombre FROM persona WHERE correo = ?");
+        $stmt = $conn->prepare("SELECT id_persona, nombre FROM persona WHERE correo = ?");
         $stmt->bind_param("s", $correo);
         $stmt->execute();
         $result = $stmt->get_result();
-
         if ($result->num_rows > 0) {
-            return $result->fetch_assoc()['nombre'];
+            return $result->fetch_assoc();
         } else {
             return null;
         }

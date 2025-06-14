@@ -1,11 +1,24 @@
 <?php
 session_start();
-
+$mensaje = "";
 if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit();
 }
-
+if (isset($_GET['res'])) {
+    if ($_GET['res'] == 1) {
+        $mensaje = "<div class='alert alert-success' role='alert'> <div class='modal-header'>
+        <span class='material-symbols-outlined'>check_circle</span> &nbsp; Estación Eliminada correctamente.
+       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div></div>";
+    }
+    if ($_GET['res'] == 0) {
+        $mensaje = "<div class='alert alert-danger' role='alert'> <div class='modal-header'>
+        <span class='material-symbols-outlined'>Close</span> &nbsp; Ocurrio un error al eliminar la Estacion.
+       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div></div>";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -39,7 +52,7 @@ if (!isset($_SESSION['user'])) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="list-group-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="start.php">Inicio</a>
                         </li>
                         <li class="list-group-item">
                             <a class="nav-link" href="estaciones.php">Estaciones</a>
@@ -73,7 +86,7 @@ if (!isset($_SESSION['user'])) {
             <div class="offcanvas-body">
                 <div class="list-group">
                     <ul class="navbar-nav">
-                        <li class="list-group-item"><a href="#" class="nav-link active" aria-current="page">Inicio</a></li>
+                        <li class="list-group-item"><a href="start.php" class="nav-link active" aria-current="page">Inicio</a></li>
                         <li class="list-group-item"><a href="estaciones.php" class="nav-link">Estaciones</a></li>
                         <li class="list-group-item"><a href="usuarios.php" class="nav-link ">Usuarios</a></li>
                         <li class="list-group-item"><a href="configuracion.php" class="nav-link ">Configuración</a></li>
@@ -90,10 +103,17 @@ if (!isset($_SESSION['user'])) {
                     <p class="text-center">Aquí puedes ver todas las estaciones de servicio registradas.</p>
                 </div>
                 <div class="col-4">
-                   <form class="d-flex" role="search">
-                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar EDS">
-                </form>
+                    <form class="d-flex" role="search">
+                        <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar EDS">
+                    </form>
                 </div>
+            </div>
+            <div class="row ">
+                <div class="col-12"> <?php
+                                        if ($mensaje != "") {
+                                            echo $mensaje; // Mostrar mensaje de éxito si se ha registrado correctamente
+                                        }
+                                        ?></div>
             </div>
             <div class="row" id="eds-cards"></div>
 

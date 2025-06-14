@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $image = $_FILES['imagen'] ?? null; // Verificar si se subió una imagen
     echo $image['name'];
     $numero = Registro_Eds($conn, $nombre, $lat, $lon, $image);
-    servicios($conn, $numero, $tienda, $hospedaje, $banos, $taller, $lavado, $restaurante, $carga, $cajero, $llanteria);
+    Servicios($conn, $numero, $tienda, $hospedaje, $banos, $taller, $lavado, $restaurante, $carga, $cajero, $llanteria);
     Combustibles($conn, $numero, $gasolina, $extra, $diesel, $gas);
 
     echo "<script>window.location.href='../dashboard/estaciones.php?echo=1';</script>";

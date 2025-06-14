@@ -2,22 +2,32 @@
 session_start();
 $mensaje = "";
 $id = "";
+
 if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit();
 }
 //si existe un get echo con valor 1, se muestra un mensaje de éxito
-if (isset($_GET['echo']) && $_GET['echo'] == 1) {
-    $mensaje = "<div class='alert alert-success' role='alert'> <div class='modal-header'>
-        <span class='material-symbols-outlined'>check_circle</span> Estación Actualizada correctamente.
+if (isset($_GET['res'])) {
+    if ($_GET['res'] == 1) {
+        $mensaje = "<div class='alert alert-success' role='alert'> <div class='modal-header'>
+        <span class='material-symbols-outlined'>check_circle</span> &nbsp; Estación Actualizada correctamente.
        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
       </div></div>";
+    }
+    if ($_GET['res'] == 2) {
+        $mensaje = "<div class='alert alert-danger' role='alert'> <div class='modal-header'>
+        <span class='material-symbols-outlined'>Close</span> &nbsp; Ocurrio un error al actualizada la Estacion.
+       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div></div>";
+    }
 }
 if (isset($_GET['id']) == "" || $_GET['id'] == null) {
     echo "<script>alert('No se ha seleccionado ninguna estación.');  window.location.href='listado.php';</script>";
 } else {
     $id = $_GET['id'];
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +42,7 @@ if (isset($_GET['id']) == "" || $_GET['id'] == null) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="icon" href="../../img/TUEDS.svg" />
-    <title>Estaciones</title>
+    <title>Visualizar EDS</title>
 </head>
 
 <body>
@@ -105,9 +115,15 @@ if (isset($_GET['id']) == "" || $_GET['id'] == null) {
                         <img src="../../img/eds.png" alt="Imagen de la EDS" class="img-fluid" style="max-width: 400px; max-height: 300px; border-radius: 10px;">
                     </div>
                 </div>
-
                 <div class="col-2">
-                    <h1 class="d-flex justify-content-end my-4"><a href="../php/delete.php?id=<?php echo $id ?>" title="Eliminar" class="btn btn-dark"><span class="material-symbols-outlined">delete</span></a></h1>
+                    <div class="row">
+                        <div class="col-6">
+                            <h1 class="d-flex justify-content-end "><a href="listado.php" title="Listado" class="btn btn-dark"><span class="material-symbols-outlined">format_list_numbered</span></a></h1>
+                        </div>
+                        <div class="col-6">
+                            <h1 class="d-flex justify-content-end "><a href="../php/delete.php?id=<?php echo $id ?>" title="Eliminar" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a></h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,11 +133,11 @@ if (isset($_GET['id']) == "" || $_GET['id'] == null) {
         }
         ?>
 
-       
+
         <!-- HJADJKAS -->
-        <form action="" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
-         <input type="hidden" id="id" name="ids" value="<?php echo $id; ?>"> <!-- Campo oculto para almacenar el ID de la estación de servicio -->    
-        <div class="row">
+        <form action="../php/actualizar.php" method="POST" enctype="multipart/form-data"> <!-- Formulario de registro  que envía los datos a Registro.php por formato POST, la imagen se envía como archivo -->
+            <input type="hidden" id="id" name="ids" value="<?php echo $id; ?>"> <!-- Campo oculto para almacenar el ID de la estación de servicio -->
+            <div class="row">
                 <div class="col-6">
                     <h2 class="text-center">Datos de la EDS</h2>
                     <div class="col-md">

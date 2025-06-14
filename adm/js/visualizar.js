@@ -1,5 +1,5 @@
 const listado = async () => {
-    const id = document.getElementById('id').value;
+    const id = document.getElementById('id').value; 
     try {
         const response = await fetch(`../php/todo.php?id=${id}`);
         if (!response.ok) throw new Error('Error al cargar datos');
@@ -7,8 +7,7 @@ const listado = async () => {
         const data = await response.json();
 
         if (!data || !data.eds) {
-            console.error('Datos incompletos');
-            return;
+             window.location.href = '../dashboard/listado.php?res=0';
         }
 
         // 🟩 EDS

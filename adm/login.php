@@ -73,7 +73,10 @@ if (isset($_SESSION['user'])) {
                                             <span onclick="password()" class="input-group-text material-symbols-outlined ojo" id="visible">visibility</span>
                                         </div>
                                     </div> 
-                                    <center><button type="submit" class="btn btn-dark">iniciar sesión</button></center>
+                                    <center>
+                                        <p><a href="" style="color: #fff;">Olvide contraseña</a></p>
+                                        <button type="submit" class="btn btn-dark">iniciar sesión</button>
+                                    </center>
                                 </form>
                             </div>
                         </div>

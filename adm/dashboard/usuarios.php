@@ -143,7 +143,7 @@ if (isset($_GET['echo']) && $_GET['echo'] == 1) {
                 </div>
                 <br><br>
                 <center>
-                    <button type="submit" class="btn btn-dark">Registrar Admin</button>
+                    <button type="submit" class="btn btn-dark" disabled id="registro">Registrar Admin</button>
                     <button type="reset" class="btn btn-secondary">Limpiar</button>
                 </center>
             </form>
@@ -164,6 +164,60 @@ if (isset($_GET['echo']) && $_GET['echo'] == 1) {
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
+    <script>
+        if (document.getElementById('password')) {
+            document.getElementById('password').addEventListener('input', function() {
+                const mensajeId = 'password-alert';
+                let mensajeExistente = document.getElementById(mensajeId);
+                const botonRegistro = document.getElementById('registro');
+
+                if (!mensajeExistente) {
+                    mensajeExistente = document.createElement('div');
+                    mensajeExistente.id = mensajeId;
+                    mensajeExistente.className = 'alert alert-success mt-2';
+                    mensajeExistente.style.width = '100%';
+                    this.closest('.mb-3').appendChild(mensajeExistente);
+                }
+
+                // Expresiones regulares
+                const mayuscula = /[A-Z]/;
+                const minuscula = /[a-z]/;
+                const numero = /[0-9]/;
+                const especial = /[\'^£$%&*()}.:{@#~?><>,;´¨¿?"°!¡`|=_+¬-]/;
+
+                // Verificaciones
+                const cumpleMayuscula = mayuscula.test(this.value);
+                const cumpleMinuscula = minuscula.test(this.value);
+                const cumpleNumero = numero.test(this.value);
+                const cumpleEspecial = especial.test(this.value);
+                const cumpleLongitud = this.value.length >= 8;
+
+                // Mostrar los resultados
+                mensajeExistente.innerHTML = `
+            <ul class="mb-0">
+                <li>${cumpleLongitud ? '✔️' : '❌'} Mínimo 8 caracteres</li>
+                <li>${cumpleMayuscula ? '✔️' : '❌'} Al menos una mayúscula</li>
+                <li>${cumpleMinuscula ? '✔️' : '❌'} Al menos una minúscula</li>
+                <li>${cumpleNumero ? '✔️' : '❌'} Al menos un número</li>
+                <li>${cumpleEspecial ? '✔️' : '❌'} Al menos un carácter especial</li>
+            </ul>
+        `;
+
+                // Habilitar botón si cumple todo
+                const esValido = cumpleMayuscula && cumpleMinuscula && cumpleNumero && cumpleEspecial && cumpleLongitud;
+
+                if (botonRegistro) {
+                    botonRegistro.disabled = !esValido;
+                }
+
+                // Si el campo está vacío, quitar mensaje y deshabilitar botón
+                if (this.value.length === 0) {
+                    mensajeExistente.remove();
+                    if (botonRegistro) botonRegistro.disabled = true;
+                }
+            });
+        }
+    </script>
 
 </body>
 

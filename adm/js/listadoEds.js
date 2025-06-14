@@ -27,16 +27,15 @@ function renderTable(data) {
     data.forEach(item => {
         const col = document.createElement('div');
         col.className = 'col-md-3 mb-4'; // 4 columnas por fila
-
+//   <a href="../dashboard/visualizar.php?id=${btoa(item.id)}&res" class="dropdown-item"></a>
         col.innerHTML = `
-            <div class="card h-100 shadow-sm">
+             <a href="../dashboard/visualizar.php?id=${btoa(item.id)}&res" class="btn2"> <div class="card h-100 shadow-sm">
+           
                 <img src="../../${item.img}" class="card-img-top" alt="${item.nombre}" style="height: 150px; object-fit: cover;">
                 <div class="card-body">
-                <a href="../dashboard/visualizar.php?id=${btoa(item.id)}" class="dropdown-item">
-                    <h5 class="card-title">${item.nombre}</h5></a>
-                    
+                    <h5 class="card-title">${item.nombre}</h5>
                 </div>
-            </div>
+            </div></a>
         `;
 
         container.appendChild(col);

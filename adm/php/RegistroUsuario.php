@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $apellido = $_POST['apellido'] ?? '';
     $telefono = $_POST['tel'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
-    $Correo = $_POST['email'] ?? '';
+    $Correo = strtolower( $_POST['email'] ?? '');    
     $pass = $_POST['pass'] ?? '';
 
     // echo $nombre."<br>";
