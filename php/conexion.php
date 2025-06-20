@@ -5,6 +5,11 @@
 // $base_datos = 'if0_39210269_tuedes';   // MYSQL_DATABASE
 // $port = 3306;            // Puerto por defecto de MySQL
 
+$host = 'mysql.railway.internal';         // MYSQLHOST
+$usuario = 'root';         // Usuario por defecto
+$contrasena = 'yIMRFJUFMvQyLhGxebOSvDvnaWauGFHq';   // MYSQL_ROOT_PASSWORD
+$base_datos = 'railway';   // MYSQL_DATABASE
+$port = 3306;            // Puerto por defecto de MySQL
 
 $host = "localhost";
 $usuario = "root";
