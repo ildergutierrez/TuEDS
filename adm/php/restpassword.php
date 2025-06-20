@@ -3,10 +3,14 @@ if(!isset($_POST['username'])) {
     header('Location: ../login.php');
     exit();
 }
-require '../vendor/autoload.php'; // Usar la autocarga de Composer
+require_once '../../vendor/autoload.php'; // Asegúrate de que la ruta sea correcta para tu proyecto
 
+// Importar las clases necesarias de PHPMailer
+// Asegúrate de que la ruta sea correcta para tu proyecto
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 
 include_once "../../php/conexion.php";
 $username = $_POST['username'] ?? '';
