@@ -89,7 +89,10 @@ function EDS(listaEDS) {
         estacionHTML += `
             <div class="col-12 col-md-4 mb-3">
                 <div class="card h-100">
-                    <img src="${eds.img}" class="card-img-top" alt="${eds.nombre}" />
+                    <img src="${eds.img}" class="card-img-top" alt="${eds.nombre}"  oncontextmenu="return false;"
+              ondragstart="return false;"
+              onmousedown="return false;"
+              style="pointer-events: none; user-select: none" />
                     <div class="card-body text-center">
                         <h5 class="card-title">${eds.nombre}</h5>
                         <p class="text-muted small">

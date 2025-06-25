@@ -46,7 +46,10 @@ function MostrarEstaciones(estaciones) {
 
         col.innerHTML = `
       <div class="card h-100">
-        <img src="../${eds.img}" class="card-img-top" alt="${eds.nombre}" />
+        <img src="../${eds.img}" class="card-img-top" alt="${eds.nombre}"  oncontextmenu="return false;"
+              ondragstart="return false;"
+              onmousedown="return false;"
+              style="pointer-events: none; user-select: none"/>
         <div class="card-body">
           <h5 class="card-title text-center">${eds.nombre}</h5>
           <div id="${mapId}" class="map-container" style="height: 200px;"></div>

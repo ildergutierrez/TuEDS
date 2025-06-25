@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
     echo "<script>window.location.href='../dashboard/visualizar.php?id=$id&res=2';</script>";
 }
-function Actualizar_Eds($conn, $id, $name, $lat, $lon,  $image, $cod)
+function Actualizar_Eds($conn, $id, $name, $lat, $lon,  $image)
 {
     $img = "";
     // $sql = $conn->prepare("INSERT INTO eds (nombre, lat, lon) VALUES (?, ?, ?)");
@@ -47,13 +47,23 @@ function Actualizar_Eds($conn, $id, $name, $lat, $lon,  $image, $cod)
     $sql->execute();
     $result = $sql->get_result();
     if ($result->num_rows > 0) {
+    //    echo "UPDATE eds SET nombre = $name, lat = $lat, lon = $lon WHERE id = $id";
+    //    die();
         // Si ya existe, actualizamos
-        $sql = $conn->prepare("UPDATE eds SET nombre = ?, lat = ?, lon = ? WHERE id = ?");
-        $sql->bind_param("sssi", $name, $lat, $lon, $id);
+        $sql = $conn->prepare("UPDATE `eds` SET nombre = ?, lat = ?, lon = ? WHERE id = ?");
+        // die($sql);
+        $sql->bind_param("sddi", $name, $lat, $lon, $id);
         // Verificar si se subió una imagen
-        if ($image && $image['error'] === UPLOAD_ERR_OK) { // Verificar si se subió una imagen sin errores
-            subirImagen($conn, $id, $image); // Llamar a la función para subir la imagen
+        if ($sql->execute()) {
+            // Si se actualizó correctamente, guardamos la imagen si existe
+            if ($image && $image['error'] === UPLOAD_ERR_OK) { // Verificar si se subió una imagen sin errores
+                subirImagen($conn, $id, $image); // Llamar a la función para subir la imagen
+            }
+        } else {
+            echo "<script>window.location.href='../dashboard/visualizar.php?id=$id&res=2';</script>";
         }
+       
+    
     } else {
         echo "<script>window.location.href='../dashboard/visualizar.php?id=$id&res=2';</script>";
     }

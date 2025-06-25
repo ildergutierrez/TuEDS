@@ -42,7 +42,10 @@ if (isset($_SESSION['user'])) {
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-8">
-                                <img src="../img/TUEDS.svg" alt="TUEDS Logo" class="img-fluid">
+                                <img src="../img/TUEDS.svg" alt="TUEDS Logo" class="img-fluid" oncontextmenu="return false;"
+                                    ondragstart="return false;"
+                                    onmousedown="return false;"
+                                    style="pointer-events: none; user-select: none;">
                                 <h2 class="text-center">Bienvenido a TU EDS</h2>
                                 <p class="text-center">Sistema de gestión de las Estaciones de Servicio</p>
                             </div>
@@ -61,7 +64,7 @@ if (isset($_SESSION['user'])) {
                                 if (isset($_GET['error']) && $_GET['error'] == 'invalid_credentials') {
                                     echo ' <div class="alerts"><p >Usuario o contraseña incorrectos.<br> Si no tienes una cuenta, por favor contacta al administrador.</p>     </div>';
                                 } ?>
-                                
+
                                 <form action="php/login.php" method="post">
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Usuario</label>
@@ -73,7 +76,7 @@ if (isset($_SESSION['user'])) {
                                             <input id="password" name="password" type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping" required>
                                             <span onclick="password()" class="input-group-text material-symbols-outlined ojo" id="visible">visibility</span>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <center>
                                         <p><a href="rest.php" style="color: #fff;">Olvide contraseña</a></p>
                                         <button type="submit" class="btn btn-dark">iniciar sesión</button>

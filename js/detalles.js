@@ -60,12 +60,13 @@ function Rellenar(array, km) {
   let preciosHTML = '';
   //  console.log("dis: ",km);
   // console.log("Datos de la estación:", array);
-  if (km > 0) {
+  if (km > 0 ) {// Solo mostrar si la distancia es mayor a 0
     preciosHTML += `<div class="distancia mb-3">
       <span class="material-symbols-outlined text-warning">location_on</span>
       <strong>Distancia:</strong> ${km.toFixed(2)} km
     </div>`;
   }
+  
 
 
 
