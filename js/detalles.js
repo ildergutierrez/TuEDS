@@ -29,6 +29,7 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
 
 // Obtiene el valor del parámetro "id"
 const id = params.get('staction');
+const imagen = getElementById("imagen");
 const informacion = document.getElementById("information");
 const array = async () => {
   try {
@@ -125,6 +126,10 @@ function Rellenar(array, km) {
 
   informacion.innerHTML = html;
 
+imagen.innerHTML=`<img               oncontextmenu="return false;"
+              ondragstart="return false;"
+              onmousedown="return false;"
+              style="pointer-events: none; user-select: none" />
   // Mapa y nombre
 
   document.getElementById("name").innerText = array.nombre;
