@@ -29,13 +29,13 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
 
 // Obtiene el valor del parámetro "id"
 const id = params.get('staction');
-const imagen = getElementById("imagen");
+const imagen = document.getElementById("imagen");
 const informacion = document.getElementById("information");
 const array = async () => {
   try {
     const respuesta = await fetch("../php/detallejson.php?callback=estaciones&dt=" + id);
     const data = await respuesta.json();
-    // console.log(data);
+    console.log(data);
     let distancia = 0; // Inicializamos la distancia
     let ubicacion = null;
     try {
@@ -126,10 +126,12 @@ function Rellenar(array, km) {
 
   informacion.innerHTML = html;
 
-imagen.innerHTML=`<img               oncontextmenu="return false;"
+imagen.innerHTML=`<img  oncontextmenu="return false;"
               ondragstart="return false;"
               onmousedown="return false;"
-              style="pointer-events: none; user-select: none" />
+              style="pointer-events: none; user-select: none"
+              src="../${array.imagen}" alt="Imagen de la estación de servicio" class="img-fluid rounded mb-3"  loading="lazy"  width="100%" height="auto"  draggable="false"  ondragstart="return false;" oncontextmenu="return false;" onmousedown="return false;"
+              />`
   // Mapa y nombre
 
   document.getElementById("name").innerText = array.nombre;

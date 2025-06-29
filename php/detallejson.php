@@ -22,6 +22,7 @@ function Valores($conn, $id)
             "nombre" => $row['nombre'],
             "latitud" => $row['lat'],
             "longitud" => $row['lon'],
+            "imagen" => $row['img'],
             "servicios" => Servicios($conn, $row['id']),
             "combustibles" => Costos($conn, $row['id'])
         );
